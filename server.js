@@ -1019,4 +1019,9 @@ boot();
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log("Running on port", PORT));
+
+if (process.env.VERCEL) {
+  module.exports = app; // ✅ serverless
+} else {
+  app.listen(PORT, () => console.log("Running on http://localhost:" + PORT));
+}
